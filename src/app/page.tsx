@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BarChart3, Building2, Calculator, Users, MapPin, Phone, Mail, Instagram, Linkedin } from "lucide-react";
+import { ArrowRight, BarChart3, Building2, Calculator, Users, MapPin, Phone, Mail } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
 export default async function Home() {
@@ -159,11 +159,11 @@ export default async function Home() {
               Contabilidade consultiva focada em resultados, segurança e crescimento para o seu negócio.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors">
-                <Instagram className="w-5 h-5" />
+              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors text-xs font-bold uppercase tracking-wider">
+                IG
               </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors">
-                <Linkedin className="w-5 h-5" />
+              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors text-xs font-bold uppercase tracking-wider">
+                IN
               </a>
             </div>
           </div>
