@@ -186,11 +186,14 @@ export default async function Home() {
               Contabilidade consultiva focada em resultados, segurança e crescimento para o seu negócio.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors text-xs font-bold uppercase tracking-wider">
+              <a href="https://www.instagram.com/nzdcontabilidade/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors text-xs font-bold uppercase tracking-wider">
                 IG
               </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors text-xs font-bold uppercase tracking-wider">
+              <a href="https://www.linkedin.com/company/nzdcontabilidade/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors text-xs font-bold uppercase tracking-wider">
                 IN
+              </a>
+              <a href="https://www.youtube.com/@nzdcontabilidade" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors text-xs font-bold uppercase tracking-wider">
+                YT
               </a>
             </div>
           </div>
@@ -218,13 +221,13 @@ export default async function Home() {
           <div>
             <h4 className="text-lg font-bold mb-6 text-white">Contato</h4>
             <ul className="space-y-4 text-gray-300 text-sm">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-nzd-secondary shrink-0" />
-                <span>Rua Exemplo de Endereço, 123<br/>Bairro - Cidade/UF</span>
-              </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-nzd-secondary shrink-0" />
-                <span>(00) 0000-0000</span>
+                <span>(24) 3026-5648 | (24) 3337-4865</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-green-500 shrink-0" />
+                <span>WhatsApp: (24) 3026-5648</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-nzd-secondary shrink-0" />
