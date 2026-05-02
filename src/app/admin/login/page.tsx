@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LoginAdmin() {
   const [email, setEmail] = useState("");
@@ -40,10 +41,8 @@ export default function LoginAdmin() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="bg-white p-8 md:p-10 rounded-xl shadow-lg border border-gray-100 w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="text-3xl font-bold text-nzd-primary mb-2">
-            NZD<span className="text-nzd-secondary">.</span> Admin
-          </div>
+        <div className="text-center mb-8 flex flex-col items-center">
+          <Image src="/logo.png" alt="NZD Contabilidade" width={180} height={60} className="h-auto w-auto max-h-16 mb-4" />
           <p className="text-gray-500 text-sm">
             Acesse o painel para gerenciar o conteúdo do site.
           </p>

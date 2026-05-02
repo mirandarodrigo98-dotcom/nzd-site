@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BarChart3, Building2, Calculator, Users, MapPin, Phone, Mail, Banknote, RefreshCcw, Stethoscope, Scale, CheckCircle2 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
@@ -36,9 +37,9 @@ export default async function Home() {
     <div className="min-h-screen flex flex-col">
       {/* 1. Header (Cabeçalho) */}
       <header className="w-full bg-white border-b border-gray-100 py-4 px-6 md:px-12 flex items-center justify-between sticky top-0 z-50">
-        <div className="text-2xl font-bold text-nzd-primary flex items-center gap-2">
-          NZD<span className="text-nzd-secondary">.</span>
-        </div>
+        <Link href="/" className="flex items-center">
+          <Image src="/logo.png" alt="NZD Contabilidade" width={140} height={48} className="h-auto w-auto max-h-12" priority />
+        </Link>
         <nav className="hidden md:flex gap-8 text-sm font-medium text-gray-600">
           <Link href="/" className="hover:text-nzd-secondary transition-colors">Início</Link>
           <Link href="#quem-somos" className="hover:text-nzd-secondary transition-colors">Quem Somos</Link>
@@ -178,9 +179,9 @@ export default async function Home() {
       <footer id="contato" className="bg-nzd-primary text-white pt-20 pb-10 px-6 md:px-12">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="lg:col-span-1">
-            <div className="text-3xl font-bold text-white mb-6">
-              NZD<span className="text-nzd-secondary">.</span>
-            </div>
+            <Link href="/" className="inline-block mb-6">
+              <Image src="/logo.png" alt="NZD Contabilidade" width={160} height={55} className="h-auto w-auto max-h-14 brightness-0 invert" />
+            </Link>
             <p className="text-gray-300 text-sm leading-relaxed mb-6">
               Contabilidade consultiva focada em resultados, segurança e crescimento para o seu negócio.
             </p>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { LayoutDashboard, Newspaper, Settings, Briefcase, LogOut } from "lucide-react";
 
 export const metadata = {
@@ -15,10 +16,8 @@ export default function AdminLayout({
       {/* Menu Lateral (Sidebar) */}
       <aside className="w-64 bg-nzd-primary text-white flex flex-col shadow-xl hidden md:flex">
         <div className="p-6 border-b border-white/10">
-          <div className="text-2xl font-bold">
-            NZD<span className="text-nzd-secondary">.</span> Admin
-          </div>
-          <p className="text-gray-400 text-xs mt-1">Gestão de Conteúdo</p>
+          <Image src="/logo.png" alt="NZD Contabilidade" width={140} height={48} className="h-auto w-auto max-h-10 brightness-0 invert mb-2" />
+          <p className="text-gray-400 text-xs mt-1">Painel de Gestão</p>
         </div>
 
         <nav className="flex-1 py-6 px-4 space-y-2">
@@ -51,7 +50,7 @@ export default function AdminLayout({
       {/* Área Principal */}
       <main className="flex-1 flex flex-col h-screen overflow-y-auto">
         <header className="bg-white border-b border-gray-200 py-4 px-8 flex justify-between items-center md:hidden">
-          <div className="text-xl font-bold text-nzd-primary">NZD.</div>
+          <Image src="/logo.png" alt="NZD Contabilidade" width={100} height={35} className="h-auto w-auto max-h-8" />
           <button className="p-2 bg-gray-100 rounded-md">Menu</button>
         </header>
         <div className="p-8">
