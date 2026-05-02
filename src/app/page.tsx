@@ -1,12 +1,35 @@
 import Link from "next/link";
-import { ArrowRight, BarChart3, Building2, Calculator, Users, MapPin, Phone, Mail } from "lucide-react";
+import { ArrowRight, BarChart3, Building2, Calculator, Users, MapPin, Phone, Mail, Banknote, RefreshCcw, Stethoscope, Scale, CheckCircle2 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
+// Função auxiliar para renderizar o ícone correto baseado no nome salvo no banco
+function renderIcon(iconName: string | null) {
+  const props = { className: "w-8 h-8 text-nzd-secondary" };
+  switch (iconName) {
+    case "BarChart3": return <BarChart3 {...props} />;
+    case "Calculator": return <Calculator {...props} />;
+    case "Users": return <Users {...props} />;
+    case "Building2": return <Building2 {...props} />;
+    case "Banknote": return <Banknote {...props} />;
+    case "RefreshCcw": return <RefreshCcw {...props} />;
+    case "Stethoscope": return <Stethoscope {...props} />;
+    case "Scale": return <Scale {...props} />;
+    default: return <CheckCircle2 {...props} />;
+  }
+}
+
 export default async function Home() {
-  // Puxa as 3 últimas notícias do banco de dados (que o robô preencheu)
+  // Puxa as 3 últimas notícias do banco de dados
   const ultimasNoticias = await prisma.noticia.findMany({
     orderBy: { data_publicacao: 'desc' },
     take: 3
+  });
+
+  // Puxa os serviços reais cadastrados no banco
+  const servicos = await prisma.servico.findMany({
+    where: { ativo: true },
+    orderBy: { ordem: 'asc' },
+    take: 8
   });
 
   return (
@@ -24,7 +47,7 @@ export default async function Home() {
           <Link href="#contato" className="hover:text-nzd-secondary transition-colors">Contato</Link>
         </nav>
         <button className="bg-nzd-primary hover:bg-nzd-primary/90 text-white px-5 py-2.5 rounded-md text-sm font-semibold transition-all shadow-sm hover:shadow">
-          Área do Cliente
+          <a href="https://nzdcontabilidade.app.questorpublico.com.br/" target="_blank" rel="noopener noreferrer">Área do Cliente</a>
         </button>
       </header>
 
@@ -38,13 +61,13 @@ export default async function Home() {
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mb-10 relative z-10 leading-relaxed">
             Somos a extensão da sua empresa. Transformamos dados contábeis em estratégias claras e seguras para o seu crescimento contínuo.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 relative z-10">
+          <div className="flex gap-4">
             <Link href="#contato" className="bg-nzd-secondary hover:bg-nzd-secondary/90 text-white px-8 py-3.5 rounded-md text-base font-bold transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
               Fale com um Especialista <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link href="#solucoes" className="bg-white hover:bg-gray-50 text-nzd-primary border border-gray-200 px-8 py-3.5 rounded-md text-base font-bold transition-all shadow-sm">
-              Nossas Soluções
-            </Link>
+            <a href="https://nzdcontabilidade.app.questorpublico.com.br/" target="_blank" rel="noopener noreferrer" className="bg-white hover:bg-gray-50 text-nzd-primary border border-gray-200 px-8 py-3.5 rounded-md text-base font-bold transition-all shadow-sm">
+              Área do Cliente
+            </a>
           </div>
         </section>
 
@@ -59,13 +82,17 @@ export default async function Home() {
                 Muito mais que números. <br/>Uma parceria para o seu crescimento.
               </h2>
               <p className="text-gray-600 mb-6 leading-relaxed text-lg">
-                A NZD Contabilidade nasceu com o propósito de transformar a visão tradicional da contabilidade. Não somos apenas geradores de guias e obrigações, somos o seu braço direito estratégico.
+                A NZD Contabilidade tem um perfil consultivo desde sua criação. Atendemos empresas de todos os tamanhos e de diversas regiões do Brasil. Somos incansáveis na busca pela excelência em todas as nossas ações, um verdadeiro desafio diante da complexidade da legislação brasileira.
               </p>
               <p className="text-gray-600 mb-10 leading-relaxed text-lg">
-                Contamos com uma equipe altamente experiente e em constante capacitação, preparada para atender às suas demandas com agilidade e precisão.
+                Priorizamos o crescimento técnico e humano dos nossos colaboradores, fornecendo-lhes ferramentas para o aperfeiçoamento, além de equipamentos de ponta para oferecer a melhor experiência possível no atendimento ao cliente.
               </p>
+              <blockquote className="border-l-4 border-nzd-secondary pl-4 italic text-gray-500 mb-10">
+                “A função moderna e verdadeira do profissional da contabilidade é, pois, a de um consultor sobre assuntos da riqueza das empresas.”<br/>
+                <span className="font-bold text-nzd-primary mt-2 inline-block">— Antônio Lopes de Sá</span>
+              </blockquote>
               <Link href="/quem-somos" className="inline-flex items-center text-nzd-secondary font-bold hover:text-nzd-primary transition-colors text-lg group">
-                Conheça nossa história completa 
+                Conheça a trajetória de nosso Diretor
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -73,7 +100,7 @@ export default async function Home() {
             <div className="bg-gray-100 rounded-2xl aspect-[4/3] flex flex-col items-center justify-center relative overflow-hidden shadow-inner">
               <div className="absolute inset-0 bg-gradient-to-tr from-nzd-primary/10 to-nzd-secondary/10"></div>
               <Users className="h-20 w-20 text-nzd-primary/30 mb-4 relative z-10" />
-              <p className="text-sm text-gray-500 font-medium relative z-10">Espaço para foto da equipe</p>
+              <p className="text-sm text-gray-500 font-medium relative z-10">Foto de Rodrigo Miranda ou Equipe NZD</p>
             </div>
           </div>
         </section>
@@ -84,25 +111,24 @@ export default async function Home() {
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-nzd-primary mb-6">Nossas Soluções</h2>
               <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-                Oferecemos um portfólio completo e personalizado para garantir a conformidade e impulsionar o sucesso financeiro da sua empresa.
+                Atendemos desde MEI, micro e pequenas empresas até grandes corporações, igrejas, clubes e instituições sem fins lucrativos.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                { title: "Gestão Contábil", desc: "Análise profunda do seu patrimônio para decisões mais assertivas.", icon: <BarChart3 className="w-8 h-8 text-nzd-secondary" /> },
-                { title: "Assessoria Fiscal", desc: "Planejamento tributário inteligente para reduzir custos legais.", icon: <Calculator className="w-8 h-8 text-nzd-secondary" /> },
-                { title: "Departamento Pessoal", desc: "Gestão completa da sua folha de pagamento e obrigações trabalhistas.", icon: <Users className="w-8 h-8 text-nzd-secondary" /> },
-                { title: "Legalização", desc: "Abertura, alteração e encerramento de empresas sem burocracia.", icon: <Building2 className="w-8 h-8 text-nzd-secondary" /> },
-              ].map((servico, index) => (
-                <div key={index} className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-nzd-secondary/30 transition-all group">
-                  <div className="w-16 h-16 bg-nzd-primary/5 rounded-lg flex items-center justify-center mb-6 group-hover:bg-nzd-secondary/10 transition-colors">
-                    {servico.icon}
+              {servicos.length > 0 ? (
+                servicos.map((servico) => (
+                  <div key={servico.id} className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-nzd-secondary/30 transition-all group flex flex-col">
+                    <div className="w-16 h-16 bg-nzd-primary/5 rounded-lg flex items-center justify-center mb-6 group-hover:bg-nzd-secondary/10 transition-colors">
+                      {renderIcon(servico.icone)}
+                    </div>
+                    <h3 className="text-xl font-bold text-nzd-primary mb-3">{servico.titulo}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed flex-1">{servico.descricao}</p>
                   </div>
-                  <h3 className="text-xl font-bold text-nzd-primary mb-3">{servico.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{servico.desc}</p>
-                </div>
-              ))}
+                ))
+              ) : (
+                <div className="col-span-4 text-center py-10 text-gray-500">Nenhum serviço cadastrado.</div>
+              )}
             </div>
           </div>
         </section>
