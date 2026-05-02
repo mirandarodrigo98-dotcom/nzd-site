@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id             String   @id @default(uuid())
+  nome           String
+  email          String   @unique
+  senha          String
+  criado_em      DateTime @default(now())
+  atualizado_em  DateTime @updatedAt
+
+  @@map("usuarios")
+}
+
+model Noticia {
+  id              String   @id @default(uuid())
+  titulo          String
+  resumo          String?
+  conteudo        String
+  url_origem      String?
+  fonte           String   // Ex: Receita Federal, Portal Contábeis
+  data_publicacao DateTime
+  criado_em       DateTime @default(now())
+
+  @@map("noticias")
+}
+
+model Servico {
+  id             String   @id @default(uuid())
+  titulo         String
+  descricao      String
+  icone          String?
+  ativo          Boolean  @default(true)
+  ordem          Int      @default(0)
+
+  @@map("servicos")
+}
+
+model ConfiguracaoSite {
+  id             String   @id @default(uuid())
+  chave          String   @unique
+  valor          String
+  atualizado_em  DateTime @updatedAt
+
+  @@map("configuracoes_site")
+}
