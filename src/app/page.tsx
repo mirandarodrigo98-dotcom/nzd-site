@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BarChart3, Building2, Calculator, Users, MapPin, Phone, Mail, Banknote, RefreshCcw, Stethoscope, Scale, CheckCircle2 } from "lucide-react";
+import { ArrowRight, BarChart3, Building2, Calculator, Users, Phone, Mail, Banknote, RefreshCcw, Stethoscope, Scale, CheckCircle2, Instagram, Linkedin, Youtube } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
 // Função auxiliar para renderizar o ícone correto baseado no nome salvo no banco
@@ -186,14 +186,14 @@ export default async function Home() {
               Contabilidade consultiva focada em resultados, segurança e crescimento para o seu negócio.
             </p>
             <div className="flex gap-4">
-              <a href="https://www.instagram.com/nzdcontabilidade/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors text-xs font-bold uppercase tracking-wider">
-                IG
+              <a href="https://www.instagram.com/nzdcontabilidade/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors" title="Instagram">
+                <Instagram className="w-5 h-5 text-white" />
               </a>
-              <a href="https://www.linkedin.com/company/nzdcontabilidade/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors text-xs font-bold uppercase tracking-wider">
-                IN
+              <a href="https://www.linkedin.com/company/nzdcontabilidade/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors" title="LinkedIn">
+                <Linkedin className="w-5 h-5 text-white" />
               </a>
-              <a href="https://www.youtube.com/@nzdcontabilidade" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors text-xs font-bold uppercase tracking-wider">
-                YT
+              <a href="https://www.youtube.com/@nzdcontabilidade" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-nzd-secondary transition-colors" title="YouTube">
+                <Youtube className="w-5 h-5 text-white" />
               </a>
             </div>
           </div>
