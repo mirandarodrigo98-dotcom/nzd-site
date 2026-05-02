@@ -1,10 +1,42 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Login - Painel Administrativo | NZD",
-};
-
 export default function LoginAdmin() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [erro, setErro] = useState("");
+  const [carregando, setCarregando] = useState(false);
+  const router = useRouter();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setCarregando(true);
+    setErro("");
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, senha }),
+      });
+
+      if (res.ok) {
+        // Redireciona para o painel em caso de sucesso
+        router.push("/admin");
+      } else {
+        const data = await res.json();
+        setErro(data.erro || "E-mail ou senha incorretos.");
+      }
+    } catch (err) {
+      setErro("Erro de conexão. Tente novamente.");
+    } finally {
+      setCarregando(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="bg-white p-8 md:p-10 rounded-xl shadow-lg border border-gray-100 w-full max-w-md">
@@ -17,13 +49,21 @@ export default function LoginAdmin() {
           </p>
         </div>
 
-        <form className="space-y-6">
+        {erro && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-600 text-sm rounded-md font-medium text-center">
+            {erro}
+          </div>
+        )}
+
+        <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label className="block text-sm font-bold text-nzd-primary mb-2">
               E-mail
             </label>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 rounded-md border border-gray-200 focus:ring-2 focus:ring-nzd-secondary/50 focus:border-nzd-secondary outline-none transition-all text-gray-800"
               placeholder="seu@email.com.br"
               required
@@ -36,27 +76,20 @@ export default function LoginAdmin() {
             </label>
             <input
               type="password"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
               className="w-full px-4 py-3 rounded-md border border-gray-200 focus:ring-2 focus:ring-nzd-secondary/50 focus:border-nzd-secondary outline-none transition-all text-gray-800"
               placeholder="••••••••"
               required
             />
           </div>
 
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center gap-2 text-gray-600 cursor-pointer">
-              <input type="checkbox" className="rounded text-nzd-primary focus:ring-nzd-primary" />
-              Lembrar-me
-            </label>
-            <a href="#" className="text-nzd-secondary font-medium hover:text-nzd-primary transition-colors">
-              Esqueceu a senha?
-            </a>
-          </div>
-
           <button
             type="submit"
-            className="w-full bg-nzd-primary hover:bg-nzd-primary/90 text-white font-bold py-3.5 rounded-md transition-colors shadow-sm"
+            disabled={carregando}
+            className="w-full bg-nzd-primary hover:bg-nzd-primary/90 text-white font-bold py-3.5 rounded-md transition-colors shadow-sm disabled:opacity-50"
           >
-            Entrar no Painel
+            {carregando ? "Autenticando..." : "Entrar no Painel"}
           </button>
         </form>
 
