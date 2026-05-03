@@ -134,41 +134,42 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* 5. Notícias / Blog Preview Section */}
+        {/* 5. Notícias (Fique por Dentro) */}
         <section id="conteudos" className="w-full py-24 px-6 md:px-12 bg-white">
           <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
-              <div className="max-w-2xl">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+              <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-nzd-primary mb-4">Fique por dentro</h2>
-                <p className="text-gray-600 text-lg">Mantenha-se informado com as últimas novidades da Receita Federal e do mercado empresarial.</p>
+                <p className="text-gray-600 text-lg max-w-2xl">
+                  Mantenha-se informado com as últimas novidades da Receita Federal e do mercado empresarial.
+                </p>
               </div>
-              <Link href="/blog" className="text-nzd-secondary font-bold hover:text-nzd-primary transition-colors flex items-center gap-2 whitespace-nowrap">
-                Ver todas as notícias <ArrowRight className="w-4 h-4" />
-              </Link>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {ultimasNoticias.length > 0 ? (
                 ultimasNoticias.map((noticia) => (
-                  <div key={noticia.id} className="border border-gray-100 rounded-xl p-6 hover:shadow-lg hover:border-nzd-secondary/20 transition-all bg-white flex flex-col h-full group">
-                    <div className="text-xs font-bold text-nzd-secondary mb-3 uppercase tracking-wider bg-nzd-secondary/10 inline-block px-3 py-1 rounded-full self-start">
-                      {noticia.fonte}
+                  <div key={noticia.id} className="bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-nzd-primary/20 transition-all flex flex-col overflow-hidden group">
+                    <div className="p-8 flex flex-col flex-1">
+                      <div className="mb-6">
+                        <span className="inline-block px-3 py-1 bg-nzd-secondary/10 text-nzd-secondary font-bold text-xs rounded-full uppercase tracking-wider">
+                          {noticia.fonte}
+                        </span>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-nzd-primary transition-colors line-clamp-3">
+                        {noticia.titulo}
+                      </h3>
+                      <p className="text-gray-600 text-sm leading-relaxed mb-8 flex-1 line-clamp-4">
+                        {noticia.resumo}
+                      </p>
+                      <Link href={`/noticias/${noticia.slug}`} className="inline-flex items-center text-nzd-primary font-bold hover:text-nzd-secondary transition-colors group/link mt-auto">
+                        Ler artigo completo <ArrowRight className="ml-2 w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                      </Link>
                     </div>
-                    <h3 className="text-xl font-bold text-nzd-primary mb-3 group-hover:text-nzd-secondary transition-colors line-clamp-2">
-                      {noticia.titulo}
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-6 line-clamp-3 flex-1">
-                      {noticia.resumo}
-                    </p>
-                    <a href={noticia.url_origem || "#"} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-nzd-primary group-hover:text-nzd-secondary transition-colors flex items-center gap-1">
-                      Ler artigo na fonte <ArrowRight className="w-4 h-4" />
-                    </a>
                   </div>
                 ))
               ) : (
-                <div className="col-span-3 text-center py-10 bg-gray-50 rounded-xl border border-dashed border-gray-200">
-                  <p className="text-gray-500 font-medium">As notícias estão sendo atualizadas pelo nosso sistema. Volte em breve!</p>
-                </div>
+                <div className="col-span-3 text-center py-10 text-gray-500">Nenhuma notícia publicada ainda.</div>
               )}
             </div>
           </div>

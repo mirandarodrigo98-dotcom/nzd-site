@@ -20,6 +20,7 @@ model Usuario {
 
 model Noticia {
   id              String   @id @default(uuid())
+  slug            String   @unique
   titulo          String
   resumo          String?
   conteudo        String
