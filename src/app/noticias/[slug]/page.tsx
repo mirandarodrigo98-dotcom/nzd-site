@@ -1,8 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft, Calendar, ExternalLink } from "lucide-react";
-import Image from "next/image";
+import { Calendar, ExternalLink } from "lucide-react";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 export default async function NoticiaInterna({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -15,18 +15,10 @@ export default async function NoticiaInterna({ params }: { params: Promise<{ slu
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Header Simplificado */}
-      <header className="w-full bg-white border-b border-gray-100 py-4 px-6 md:px-12 flex items-center justify-between sticky top-0 z-50 shadow-sm">
-        <Link href="/" className="flex items-center">
-          <Image src="/logo.png" alt="NZD Contabilidade" width={140} height={48} className="h-auto w-auto max-h-12" priority />
-        </Link>
-        <Link href="/" className="text-gray-500 hover:text-nzd-primary font-medium flex items-center gap-2 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Voltar ao site
-        </Link>
-      </header>
+    <div className="flex flex-col flex-1">
+      <Header />
 
-      <main className="flex-1 py-12 px-6">
+      <main className="flex-1 py-12 px-6 bg-gray-50">
         <article className="max-w-3xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
           <div className="p-8 md:p-12">
             <div className="flex items-center gap-4 mb-6">
@@ -68,10 +60,7 @@ export default async function NoticiaInterna({ params }: { params: Promise<{ slu
         </article>
       </main>
 
-      {/* Footer Simplificado */}
-      <footer className="bg-nzd-primary text-white py-8 text-center text-sm">
-        <p>&copy; {new Date().getFullYear()} NZD Contabilidade. Todos os direitos reservados.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
