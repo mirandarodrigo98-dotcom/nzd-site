@@ -21,6 +21,7 @@ function renderIcon(iconName: string | null) {
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { HeroCarousel } from "@/components/HeroCarousel";
 
 export default async function Home() {
   // Puxa as 3 últimas notícias do banco de dados
@@ -41,24 +42,8 @@ export default async function Home() {
       <Header />
 
       <main className="flex-1">
-        {/* 2. Hero Section (Vitrine Principal) */}
-        <section className="w-full py-24 md:py-32 px-6 md:px-12 bg-gray-50 flex flex-col items-center text-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full bg-nzd-primary/5 pointer-events-none"></div>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-nzd-primary max-w-4xl tracking-tight mb-6 relative z-10">
-            Contabilidade consultiva para impulsionar o seu negócio
-          </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mb-10 relative z-10 leading-relaxed">
-            Somos a extensão da sua empresa. Transformamos dados contábeis em estratégias claras e seguras para o seu crescimento contínuo.
-          </p>
-          <div className="flex gap-4">
-            <Link href="#contato" className="bg-nzd-secondary hover:bg-nzd-secondary/90 text-white px-8 py-3.5 rounded-md text-base font-bold transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
-              Fale com um Especialista <ArrowRight className="w-5 h-5" />
-            </Link>
-            <a href="https://nzdcontabilidade.app.questorpublico.com.br/" target="_blank" rel="noopener noreferrer" className="bg-white hover:bg-gray-50 text-nzd-primary border border-gray-200 px-8 py-3.5 rounded-md text-base font-bold transition-all shadow-sm">
-              Área do Cliente
-            </a>
-          </div>
-        </section>
+        {/* 2. Hero Section (Vitrine Principal em Carrossel) */}
+        <HeroCarousel />
 
         {/* 3. Quem Somos (Resumo) */}
         <section id="quem-somos" className="w-full py-24 px-6 md:px-12 bg-white">
