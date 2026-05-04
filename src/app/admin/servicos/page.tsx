@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { prisma } from "@/lib/prisma";
 import { PlusCircle, Pencil, Trash2 } from "lucide-react";
 
